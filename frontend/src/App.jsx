@@ -64,7 +64,7 @@ const App = () => {
                 console.log(err);
                 setLoading(false);
             });
-    }, [userData]);
+    }, []);
 
     useEffect(() => {
         if (editId) {
