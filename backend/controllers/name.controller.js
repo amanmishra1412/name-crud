@@ -1,4 +1,4 @@
-const nameModal = require("../models/name");
+const nameModal = require("../models/Name");
 
 exports.create = async (req, res) => {
     try {
@@ -22,7 +22,7 @@ exports.fetchAll = async (req, res) => {
 
 exports.fetchOne = async (req, res) => {
     try {
-        console.log(req.params);
+        // console.log(req.params);
         const singleNAme = await nameModal.findOne({ _id: req.params.id });
         res.json(singleNAme);
     } catch (err) {

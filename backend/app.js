@@ -4,8 +4,8 @@ const cors = require("cors");
 const conn = require("./config/config");
 const nameroute = require("./routes/home");
 conn();
-require("dotenv").config();
-const port = process.env.PORT || 3000;
+const ENV_CONFIG = require("./config/env");
+const port = ENV_CONFIG.PORT || 3000;
 
 // Middleware
 app.use(cors());

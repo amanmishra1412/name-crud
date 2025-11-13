@@ -1,5 +1,4 @@
 const express = require("express");
-const nameModal = require("../models/name");
 const routes = express.Router();
 const {
     create,
@@ -7,7 +6,7 @@ const {
     fetchOne,
     deleteOne,
     updateOne,
-} = require("../controllers/name");
+} = require("../controllers/name.controller");
 
 routes.get("/", async (req, res) => {
     res.send("route");
