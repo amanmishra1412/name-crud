@@ -5,7 +5,7 @@ const conn = require("./config/config");
 const nameroute = require("./routes/home");
 conn();
 const ENV_CONFIG = require("./config/env");
-const port = ENV_CONFIG.PORT || 3000;
+const port = ENV_CONFIG.PORT || 10000;
 
 // Middleware
 app.use(cors());
