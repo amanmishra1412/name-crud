@@ -1,4 +1,4 @@
-const nameModal = require("../models/Name");
+const nameModal = require("../models/name");
 
 exports.create = async (req, res) => {
     try {
