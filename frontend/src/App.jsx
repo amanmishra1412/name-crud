@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import "remixicon/fonts/remixicon.css";
+const SERVER_URI = import.meta.env.VITE_SERVER_URI;
 
 const App = () => {
     const [userName, setUserName] = useState("");
@@ -14,7 +15,7 @@ const App = () => {
         try {
             if (editId) {
                 const res = await axios.put(
-                    `http://localhost:3000/api/update/${editId}`,
+                    `${SERVER_URI}/api/update/${editId}`,
                     { userName }
                 );
                 if (res.status === 200) {
@@ -28,7 +29,7 @@ const App = () => {
                 }
             } else {
                 const res = await axios.post(
-                    "http://localhost:3000/api/create",
+                    `${SERVER_URI}/api/create`,
                     { userName }
                 );
                 if (res.status === 201) {
@@ -44,7 +45,7 @@ const App = () => {
     const deleteBtn = async (id) => {
         try {
             const res = await axios.delete(
-                `http://localhost:3000/api/delete/${id}`
+                `${SERVER_URI}/api/delete/${id}`
             );
             if (res.status === 200) {
                 setUserData(userData.filter((item) => item._id !== id));
@@ -57,7 +58,7 @@ const App = () => {
     useEffect(() => {
         setLoading(true);
         axios
-            .get("http://localhost:3000/api/fetch")
+            .get(`${SERVER_URI}/api/fetch`)
             .then((response) => {
                 setUserData(response.data);
                 setLoading(false);
@@ -71,7 +72,7 @@ const App = () => {
     useEffect(() => {
         if (editId) {
             axios
-                .get(`http://localhost:3000/api/fetch/${editId}`)
+                .get(`${SERVER_URI}/api/fetch/${editId}`)
                 .then((res) => {
                     setUserName(res.data.userName);
                 })
