@@ -28,10 +28,9 @@ const App = () => {
                     setEditId(null);
                 }
             } else {
-                const res = await axios.post(
-                    `${SERVER_URI}/api/create`,
-                    { userName }
-                );
+                const res = await axios.post(`${SERVER_URI}/api/create`, {
+                    userName,
+                });
                 if (res.status === 201) {
                     setUserData([...userData, res.data]);
                     setUserName("");
@@ -44,9 +43,7 @@ const App = () => {
 
     const deleteBtn = async (id) => {
         try {
-            const res = await axios.delete(
-                `${SERVER_URI}/api/delete/${id}`
-            );
+            const res = await axios.delete(`${SERVER_URI}/api/delete/${id}`);
             if (res.status === 200) {
                 setUserData(userData.filter((item) => item._id !== id));
             }
@@ -67,7 +64,7 @@ const App = () => {
                 console.log(err);
                 setLoading(false);
             });
-    }, []);
+    }, [userData]);
 
     useEffect(() => {
         if (editId) {
