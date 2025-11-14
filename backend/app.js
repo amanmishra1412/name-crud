@@ -10,7 +10,7 @@ const port = ENV_CONFIG.PORT || 10000;
 // Middleware
 app.use(
     cors({
-        origin: "*", // testing ke liye, later specific frontend URL bhi use kar sakte ho
+        origin: "https://name-crud.vercel.app/",
     })
 );
 app.use(express.json());
