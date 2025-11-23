@@ -2,8 +2,17 @@ const nameModal = require("../models/name");
 
 exports.create = async (req, res) => {
     try {
+        const { userName } = req.body;
+        const existingUser = await nameModal.findOne({ userName: userName });
+        if (existingUser)
+            return res
+                .status(400)
+                .json({
+                    error: `User Exist with this id = ${existingUser._id}`,
+                });
+
         const nameCreate = await nameModal.create({
-            userName: req.body.userName,
+            userName: userName,
         });
         res.status(201).json(nameCreate);
     } catch (err) {
