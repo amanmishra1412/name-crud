@@ -10,7 +10,7 @@ const port = ENV_CONFIG.PORT || 10000;
 // Middleware
 app.use(
     cors({
-        origin: ["http://localhost:5173", "https://name-crud.vercel.app/"],
+        origin: ["http://localhost:5173", "https://name-crud.vercel.app"],
         credentials: true,
     })
 );

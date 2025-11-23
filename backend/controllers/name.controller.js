@@ -5,11 +5,9 @@ exports.create = async (req, res) => {
         const { userName } = req.body;
         const existingUser = await nameModal.findOne({ userName: userName });
         if (existingUser)
-            return res
-                .status(400)
-                .json({
-                    error: `User Exist with this id = ${existingUser._id}`,
-                });
+            return res.status(400).json({
+                error: `User Exist with this id = ${existingUser.userName}`,
+            });
 
         const nameCreate = await nameModal.create({
             userName: userName,
