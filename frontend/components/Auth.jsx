@@ -1,90 +1,20 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import Login from "./Login";
+import Register from "./Register";
 
 const Auth = () => {
-    const [mode, setMode] = useState("login"); // login | register
-    
+    const [mode, setMode] = useState("login");
+
     return (
-        <div className="flex items-center justify-center p-5">
-            <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="backdrop-blur-lg bg-white/10 p-6 rounded-2xl w-full max-w-md border border-white/20 shadow-lg overflow-hidden"
-            >
+        <div className="flex items-center justify-center p-5 min-h-screen">
+            <div className="backdrop-blur-lg bg-white/10 p-6 rounded-2xl w-full max-w-md border border-white/20 shadow-lg overflow-hidden">
                 <h1 className="text-center text-3xl font-semibold text-white mb-6">
                     {mode === "login" ? "Welcome Back" : "Create Account"}
                 </h1>
 
-                {/* Animation Wrapper */}
+                {/* Form */}
                 <div className="relative h-[260px]">
-                    <AnimatePresence mode="wait">
-                        {mode === "login" ? (
-                            <motion.form
-                                key="login"
-                                initial={{ x: 80, opacity: 0 }}
-                                animate={{ x: 0, opacity: 1 }}
-                                exit={{ x: -80, opacity: 0 }}
-                                transition={{ duration: 0.35 }}
-                                className="flex flex-col gap-4 absolute w-full"
-                            >
-                                <input
-                                    type="email"
-                                    placeholder="Email"
-                                    className="input-box text-white"
-                                />
-
-                                <input
-                                    type="password"
-                                    placeholder="Password"
-                                    className="input-box text-white"
-                                />
-
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="btn-primary text-white"
-                                >
-                                    Login
-                                </motion.button>
-                            </motion.form>
-                        ) : (
-                            <motion.form
-                                key="register"
-                                initial={{ x: -80, opacity: 0 }}
-                                animate={{ x: 0, opacity: 1 }}
-                                exit={{ x: 80, opacity: 0 }}
-                                transition={{ duration: 0.35 }}
-                                className="flex flex-col gap-4 absolute w-full"
-                            >
-                                <input
-                                    type="text"
-                                    placeholder="Full Name"
-                                    className="input-box text-white"
-                                />
-
-                                <input
-                                    type="email"
-                                    placeholder="Email Address"
-                                    className="input-box text-white"
-                                />
-
-                                <input
-                                    type="password"
-                                    placeholder="Create Password"
-                                    className="input-box text-white"
-                                />
-
-                                <motion.button
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="btn-primary text-white"
-                                >
-                                    Register
-                                </motion.button>
-                            </motion.form>
-                        )}
-                    </AnimatePresence>
+                    {mode === "login" ? <Login /> : <Register />}
                 </div>
 
                 {/* Toggle Text */}
@@ -92,7 +22,6 @@ const Auth = () => {
                     {mode === "login"
                         ? "Don't have an account?"
                         : "Already have an account?"}
-
                     <button
                         onClick={() =>
                             setMode(mode === "login" ? "register" : "login")
@@ -102,7 +31,7 @@ const Auth = () => {
                         {mode === "login" ? "Register" : "Login"}
                     </button>
                 </p>
-            </motion.div>
+            </div>
 
             {/* Tailwind Custom Classes */}
             <style>{`

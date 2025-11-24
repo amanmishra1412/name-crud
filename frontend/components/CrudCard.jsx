@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import Swal from "sweetalert2";
 import "remixicon/fonts/remixicon.css";
 import axios from "axios";
@@ -10,6 +9,7 @@ const CrudCard = () => {
     const [userData, setUserData] = useState([]);
     const [editId, setEditId] = useState(null);
     const [loading, setLoading] = useState(true);
+
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
@@ -53,7 +53,6 @@ const CrudCard = () => {
                 }
             }
         } catch (err) {
-            // console.error(err);
             setUserName("");
             Swal.fire({
                 icon: "error",
@@ -96,15 +95,11 @@ const CrudCard = () => {
                 .catch((err) => console.log(err));
         }
     }, [editId]);
+
     return (
         <div className="w-100">
             {/* CRUD Card */}
-            <motion.div
-                initial={{ opacity: 0, y: -30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="backdrop-blur-lg bg-white/10 p-6 rounded-2xl w-full max-w-md border border-white/20 shadow-lg"
-            >
+            <div className="backdrop-blur-lg bg-white/10 p-6 rounded-2xl w-full max-w-md border border-white/20 shadow-lg">
                 <h1 className="text-center text-3xl font-semibold text-white mb-4">
                     {editId ? "Update User" : "Create User"}
                 </h1>
@@ -118,15 +113,11 @@ const CrudCard = () => {
                         className="w-full p-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition-all duration-300"
                     />
 
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="w-full py-3 rounded-xl bg-emerald-500 text-white font-semibold tracking-wide hover:bg-emerald-600 transition-all duration-300"
-                    >
+                    <button className="w-full py-3 rounded-xl bg-emerald-500 text-white font-semibold tracking-wide hover:bg-emerald-600 transition-all duration-300">
                         {editId ? "Update" : "Create"}
-                    </motion.button>
+                    </button>
                 </form>
-            </motion.div>
+            </div>
 
             <p className="text-white text-lg mt-5">
                 Total Users: {userData.length}
@@ -136,47 +127,33 @@ const CrudCard = () => {
             <div className="mt-6 w-full max-w-md h-80 overflow-y-auto rounded-xl bg-white/10 border border-white/20 p-4 flex flex-col gap-3 shadow-inner">
                 {loading ? (
                     <div className="flex justify-center items-center h-full">
-                        <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{
-                                repeat: Infinity,
-                                duration: 1,
-                                ease: "linear",
-                            }}
-                            className="w-10 h-10 border-4 border-white border-t-emerald-400 rounded-full"
-                        ></motion.div>
+                        <div className="w-10 h-10 border-4 border-white border-t-emerald-400 rounded-full animate-spin"></div>
                     </div>
                 ) : (
-                    <AnimatePresence>
-                        {userData.map((val) => (
-                            <motion.div
-                                key={val._id}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                                className="flex justify-between items-center p-3 rounded-lg bg-white/20 text-white border border-white/30"
-                            >
-                                <p className="text-lg font-medium">
-                                    {val.userName}
-                                </p>
-                                <div className="flex gap-4 text-xl">
-                                    <button
-                                        onClick={() => setEditId(val._id)}
-                                        className="hover:text-yellow-400 transition-colors"
-                                    >
-                                        <i className="ri-pencil-line"></i>
-                                    </button>
-                                    <button
-                                        onClick={() => deleteBtn(val._id)}
-                                        className="hover:text-red-400 transition-colors"
-                                    >
-                                        <i className="ri-delete-bin-line"></i>
-                                    </button>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </AnimatePresence>
+                    userData.map((val) => (
+                        <div
+                            key={val._id}
+                            className="flex justify-between items-center p-3 rounded-lg bg-white/20 text-white border border-white/30"
+                        >
+                            <p className="text-lg font-medium">
+                                {val.userName}
+                            </p>
+                            <div className="flex gap-4 text-xl">
+                                <button
+                                    onClick={() => setEditId(val._id)}
+                                    className="hover:text-yellow-400 transition-colors"
+                                >
+                                    <i className="ri-pencil-line"></i>
+                                </button>
+                                <button
+                                    onClick={() => deleteBtn(val._id)}
+                                    className="hover:text-red-400 transition-colors"
+                                >
+                                    <i className="ri-delete-bin-line"></i>
+                                </button>
+                            </div>
+                        </div>
+                    ))
                 )}
             </div>
         </div>
