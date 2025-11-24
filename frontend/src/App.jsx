@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Login from "../components/Auth";
-import CrudCard from "../components/CrudCard";
+import Login from "./components/Auth";
+import CrudCard from "./components/CrudCard";
 
 const App = () => {
     // PLACE LOGIN HERE — Optional Login State

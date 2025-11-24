@@ -61,7 +61,7 @@ const Register = () => {
                     setName(e.target.value);
                 }}
                 value={name}
-                placeholder="Full Name"
+                placeholder="Username"
                 className="input-box text-white outline-0"
             />
             <input
