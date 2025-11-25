@@ -4,7 +4,7 @@ import CrudCard from "./components/CrudCard";
 
 const App = () => {
     // PLACE LOGIN HERE — Optional Login State
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
 
     // If not logged in → Only show login page
     if (!isLoggedIn) {
