@@ -3,7 +3,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 const SERVER_URI = import.meta.env.VITE_SERVER_URI;
 
-const Register = () => {
+const Register = ({ mode }) => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
@@ -36,13 +36,18 @@ const Register = () => {
                 setName("");
                 setEmail("");
                 setPass("");
+                mode("login");
             }
         } catch (err) {
-            Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: err.response?.data?.msg,
-            });
+            if (err.status === 404) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: err.response?.data?.msg,
+                });
+            } else {
+                console.log(err);
+            }
         }
 
         // console.log("Submit");

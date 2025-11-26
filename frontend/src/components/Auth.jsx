@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
 
-const Auth = () => {
+const Auth = ({ onLoginSuccess }) => {
     const [mode, setMode] = useState("login");
 
     return (
@@ -14,7 +14,11 @@ const Auth = () => {
 
                 {/* Form */}
                 <div className="relative h-[260px]">
-                    {mode === "login" ? <Login /> : <Register />}
+                    {mode === "login" ? (
+                        <Login loginData={onLoginSuccess} />
+                    ) : (
+                        <Register mode={setMode} />
+                    )}
                 </div>
 
                 {/* Toggle Text */}
